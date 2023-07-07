@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+
+    <RelativeLayout
+        android:layout_width="409dp"
+        android:layout_height="675dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="55dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/logo"
+            android:text="leomessi"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back" />
+    </RelativeLayout>
+
+    <!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--        android:id="@+id/avatar"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:src="@drawable/messi"-->
+<!--        tools:layout_editor_absoluteX="16dp"-->
+<!--        tools:layout_editor_absoluteY="55dp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtFollower"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="24dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:text="leomessi"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16dp"-->
+<!--        android:textStyle="normal"-->
+<!--        tools:layout_editor_absoluteX="16dp"-->
+<!--        tools:layout_editor_absoluteY="148dp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtFollowing"-->
+<!--        android:layout_width="112dp"-->
+<!--        android:layout_height="24dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:text="100 Following"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16dp"-->
+<!--        android:textStyle="normal"-->
+<!--        tools:layout_editor_absoluteX="184dp"-->
+<!--        tools:layout_editor_absoluteY="93dp" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
