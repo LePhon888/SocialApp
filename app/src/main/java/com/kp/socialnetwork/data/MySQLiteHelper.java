@@ -5,7 +5,11 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import android.util.Log;
+
+
+import java.util.Properties;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_COMMENT = "comments";
@@ -16,11 +20,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     // Comments table column names
     public static final String COLUMN_ID_COMMENT = "comment_id";
-    public static final String COLUMN_COMMENT = "comment";
+    public static final String COLUMN_CONTENT_COMMENT = "content_comment";
+
 
     // Users table column names
     public static final String COLUMN_ID_USER = "user_id";
     public static final String COLUMN_USERNAME = "username";
+    public static final String COLUMN_EMAIL = "email";
+
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_IS_ACTIVE = "is_active";
 
@@ -43,12 +50,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // Comments table creation sql statement
     private static final String CREATE_TABLE_COMMENT = "CREATE TABLE " + TABLE_COMMENT + "("
             + COLUMN_ID_COMMENT + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_COMMENT + " TEXT NOT NULL);";
+            +  COLUMN_CONTENT_COMMENT + " TEXT NOT NULL);";
 
     // Users table creation sql statement
     private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_USERNAME + " TEXT NOT NULL, "
+            + COLUMN_EMAIL + " TEXT NOT NULL, "
             + COLUMN_PASSWORD + " TEXT NOT NULL, "
             + COLUMN_IS_ACTIVE + " INTEGER);";
 
@@ -57,7 +65,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_ID_POST + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_CONTENT + " TEXT NOT NULL, "
             + COLUMN_IMAGE + " TEXT, "
-            + COLUMN_CREATED_DATE + " INTEGER, "
+            + COLUMN_CREATED_DATE + " TEXT, "
             + COLUMN_ID_USER + " INTEGER, "
             + "FOREIGN KEY(" + COLUMN_ID_USER + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "));";
 
@@ -73,10 +81,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // Friendships table creation sql statement
     private static final String CREATE_TABLE_FRIENDSHIP = "CREATE TABLE " + TABLE_FRIENDSHIP + "("
             + COLUMN_ID_FRIENDSHIP + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_ID_USER + " INTEGER, "
-            + COLUMN_ID_USER + " INTEGER, "
-            + "FOREIGN KEY(" + COLUMN_ID_USER + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "), "
-            + "FOREIGN KEY(" + COLUMN_ID_USER + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "));";
+            + "id_user1" + " INTEGER, "
+            + "id_user2" + " INTEGER, "
+            + "FOREIGN KEY(" + "id_user1" + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "), "
+            + "FOREIGN KEY(" + "id_user2" + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "));";
 
     // Create Database
     public MySQLiteHelper(Context context) {
@@ -113,15 +121,15 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void addNewUser() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues();
-        contentValue.put(COLUMN_USERNAME, "AAA");
-        contentValue.put(COLUMN_PASSWORD, "BBB");
+        contentValue.put(COLUMN_USERNAME, "aaa");
+        contentValue.put(COLUMN_EMAIL, "aaa@gmail.com");
+        contentValue.put(COLUMN_PASSWORD, "aaa");
         contentValue.put(COLUMN_IS_ACTIVE, "1");
 
         db.insert(TABLE_USER, null, contentValue);
         db.close();
 
     }
-
 
 
 }

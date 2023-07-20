@@ -33,16 +33,28 @@
         app:layout_constraintVertical_bias="1.0">
 
         <EditText
-            android:id="@+id/usernameOrEmailEditText"
+            android:id="@+id/usernameEditText"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
             android:background="@drawable/edit_text_border"
             android:ems="12"
             android:inputType="text"
             android:padding="10dp"
-            android:hint="Username or Email"
+            android:hint="Enter Your Username"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="12"
+            android:inputType="text"
+            android:padding="10dp"
+            android:hint="Enter Your Email"
             android:textSize="16sp" />
 
         <EditText
@@ -50,41 +62,54 @@
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="1dp"
+            android:layout_margin="8dp"
             android:background="@drawable/edit_text_border"
             android:ems="12"
-            android:hint="Password"
+            android:hint="Enter Your Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/comfirmPasswordEditText"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="12"
+            android:hint="Confirm Password"
             android:inputType="textPassword"
             android:padding="10dp"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/loginBtn"
+            android:id="@+id/signUpBtn"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/black"
             android:textFontWeight="700"
-            android:text="Log in" />
+            android:text="Sign Up" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Don't have account? "
+            android:text="You have an account? "
             android:layout_gravity="center"/>
+
         <TextView
-            android:id="@+id/txtSignUp"
+            android:id="@+id/txtLogin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:text="Sign Up"
-            android:textFontWeight="500"
-            android:textColor="@color/black"
+            android:layout_height="15dp"
             android:layout_gravity="center"
-            android:clickable="true"/>
+            android:layout_marginTop="9dp"
+            android:clickable="true"
+            android:text="Login"
+            android:textColor="@color/black"
+            android:textFontWeight="500" />
 
 
     </LinearLayout>
