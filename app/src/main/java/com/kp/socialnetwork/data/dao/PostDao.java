@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.kp.socialnetwork.data.MySQLiteHelper;
 import com.kp.socialnetwork.data.model.Post;
@@ -62,11 +63,27 @@ public class PostDao {
     }
 
     public List<Post> getAllPosts() {
-        List<Post> posts = new ArrayList<Post>();
+        List<Post> posts = new ArrayList<>();
+
+//        Cursor c = database.rawQuery("SELECT * FROM Post", null);
+//
+//        while (c.moveToNext()) {
+//            Post post = new Post();
+//            post.setId(c.getInt(0));
+//            post.setContent(c.getString(1));
+//            post.setImage(c.getString(2));
+//            post.setCreatedDate(c.getString(3));
+//            post.setUser(null);
+//
+//            posts.add(post);
+//        }
+//        c.close();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_POST, allColumns,
                 null, null, null,null,null);
+
         cursor.moveToFirst();
+
         while(!cursor.isAfterLast()) {
             Post post = cursorToPost(cursor);
             posts.add(post);
@@ -83,4 +100,5 @@ public class PostDao {
         post.setCreatedDate(cursor.getString(3));
         return post;
     }
+
 }

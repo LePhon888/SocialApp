@@ -42,11 +42,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-    //cloundinary
-    // All:
-    implementation 'com.cloudinary:cloudinary-android:2.3.1'
+    //firebase
+    implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-storage:20.2.1'
 
-// Download + Preprocess:
-    implementation 'com.cloudinary:cloudinary-android-download:2.3.1'
-    implementation 'com.cloudinary:cloudinary-android-preprocess:2.3.1'
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
+
 }

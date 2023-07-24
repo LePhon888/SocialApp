@@ -49,6 +49,8 @@
                 android:src="@drawable/bell" />
         </LinearLayout>
 
+
+
         <LinearLayout
             android:id="@+id/profileLayout"
             android:layout_width="match_parent"
@@ -230,8 +232,9 @@
             android:background="@android:color/black"/>
 
         <GridView
+            android:id="@+id/postGridView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/horizontalLine"
             android:numColumns="3"/>
 
