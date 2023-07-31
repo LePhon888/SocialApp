@@ -45,19 +45,14 @@ public class PostImageAdapter extends BaseAdapter {
         ImageView imageView;
         if (convertView == null) {
             imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(100,
-                    75));
+            imageView.setLayoutParams(new GridView.LayoutParams(350,
+                    350));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         } else {
             imageView = (ImageView) convertView;
         }
         Picasso.get().load(imagePaths.get(position)).into(imageView);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
         return imageView;
     }
 

@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
@@ -45,6 +48,16 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d("TE", imagePaths.size()+"");
         adapter = new PostImageAdapter(this, imagePaths);
         postGridView.setAdapter(adapter);
+
+        postGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedImage = imagePaths.get(position);
+                Intent intent = new Intent(ProfileActivity.this, PostListActivity.class);
+                intent.putExtra("SELECTED_IMAGE", selectedImage);
+                startActivity(intent);
+            }
+        });
 
     }
 }
