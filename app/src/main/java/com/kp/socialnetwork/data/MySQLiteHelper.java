@@ -24,12 +24,34 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 
     // Users table column names
-    public static final String COLUMN_ID_USER = "user_id";
-    public static final String COLUMN_USERNAME = "username";
-    public static final String COLUMN_EMAIL = "email";
-
-    public static final String COLUMN_PASSWORD = "password";
-    public static final String COLUMN_IS_ACTIVE = "is_active";
+    // User
+    public static final String COLUMN_USER_ID = "user_id";
+    public static final String COLUMN_USER_NAME = "name";
+    public static final String COLUMN_USER_EMAIL = "email";
+    public static final String COLUMN_USER_PASSWORD = "password";
+    public static final String COLUMN_USER_IS_ACTIVE = "is_active";
+    public static final String COLUMN_USER_IMAGE_AVATAR = "image_avatar";
+    public static final String COLUMN_USER_IMAGE_COVER = "image_cover";
+    public static final String COLUMN_USER_BIO = "bio";
+    public static final String COLUMN_USER_GENDER = "gender";
+    public static final String COLUMN_USER_BIRTHDAY = "birthday";
+    public static final String COLUMN_USER_CREATED_DATE = "created_date";
+    public static final String COLUMN_USER_USER_ROLE = "user_role";
+    public static final String COLUMN_USER_IS_ONLINE = "is_online";
+    private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + "("
+            + COLUMN_USER_ID + " TEXT PRIMARY KEY NOT NULL, "
+            + COLUMN_USER_NAME + " TEXT NOT NULL, "
+            + COLUMN_USER_GENDER + " TEXT NOT NULL, "
+            + COLUMN_USER_BIRTHDAY + " TEXT NOT NULL, "
+            + COLUMN_USER_EMAIL + " TEXT NOT NULL, "
+            + COLUMN_USER_IMAGE_AVATAR +" TEXT , "
+            + COLUMN_USER_IMAGE_COVER + " TEXT, "
+            + COLUMN_USER_BIO +  " " + "TEXT, "
+            + COLUMN_USER_CREATED_DATE + " " + "TEXT, "
+            + COLUMN_USER_PASSWORD + " TEXT NOT NULL, "
+            + COLUMN_USER_USER_ROLE + " TEXT NOT NULL, "
+            + COLUMN_USER_IS_ONLINE + " INTEGER, "
+            + COLUMN_USER_IS_ACTIVE + " INTEGER);";
 
     // Posts table column names
     public static final String COLUMN_ID_POST = "post_id";
@@ -53,12 +75,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             +  COLUMN_CONTENT_COMMENT + " TEXT NOT NULL);";
 
     // Users table creation sql statement
-    private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_USERNAME + " TEXT NOT NULL, "
-            + COLUMN_EMAIL + " TEXT NOT NULL, "
-            + COLUMN_PASSWORD + " TEXT NOT NULL, "
-            + COLUMN_IS_ACTIVE + " INTEGER);";
+//    private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + "("
+//            + COLUMN_ID_USER + " TEXT PRIMARY KEY , "
+//            + COLUMN_USERNAME + " TEXT NOT NULL, "
+//            + COLUMN_AVATAR + " TEXT, "
+//            + COLUMN_EMAIL + " TEXT NOT NULL, "
+//            + COLUMN_PASSWORD + " TEXT NOT NULL, "
+//            + COLUMN_IS_ACTIVE + " INTEGER);";
 
     // Posts table creation sql statement
     private static final String CREATE_TABLE_POST = "CREATE TABLE " + TABLE_POST + "("
@@ -66,30 +89,32 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_CONTENT + " TEXT NOT NULL, "
             + COLUMN_IMAGE + " TEXT, "
             + COLUMN_CREATED_DATE + " TEXT, "
-            + COLUMN_ID_USER + " INTEGER, "
-            + "FOREIGN KEY(" + COLUMN_ID_USER + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "));";
+            + COLUMN_USER_ID + " INTEGER, "
+            + "FOREIGN KEY(" + COLUMN_USER_ID + ") REFERENCES " + TABLE_USER + "(" + COLUMN_USER_ID + "));";
 
     // Activities table creation sql statement
     private static final String CREATE_TABLE_ACTIVITY = "CREATE TABLE " + TABLE_ACTIVITY + "("
             + COLUMN_ID_ACTIVITY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_CATEGORY + " TEXT NOT NULL, "
-            + COLUMN_ID_USER + " INTEGER, "
+            + COLUMN_USER_ID + " INTEGER, "
             + COLUMN_ID_POST + " INTEGER, "
-            + "FOREIGN KEY(" + COLUMN_ID_USER + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "), "
+            + "FOREIGN KEY(" + COLUMN_USER_ID + ") REFERENCES " + TABLE_USER + "(" + COLUMN_USER_ID + "), "
             + "FOREIGN KEY(" + COLUMN_ID_POST + ") REFERENCES " + TABLE_POST + "(" + COLUMN_ID_POST + "));";
 
     // Friendships table creation sql statement
-    private static final String CREATE_TABLE_FRIENDSHIP = "CREATE TABLE " + TABLE_FRIENDSHIP + "("
-            + COLUMN_ID_FRIENDSHIP + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "id_user1" + " INTEGER, "
-            + "id_user2" + " INTEGER, "
-            + "FOREIGN KEY(" + "id_user1" + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "), "
-            + "FOREIGN KEY(" + "id_user2" + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "));";
+//    private static final String CREATE_TABLE_FRIENDSHIP = "CREATE TABLE " + TABLE_FRIENDSHIP + "("
+//            + COLUMN_ID_FRIENDSHIP + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+//            + "id_user1" + " INTEGER, "
+//            + "id_user2" + " INTEGER, "
+//            + "FOREIGN KEY(" + "id_user1" + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "), "
+//            + "FOREIGN KEY(" + "id_user2" + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID_USER + "));";
 
     // Create Database
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+
 
     // Create multiple tables
     @Override
@@ -99,7 +124,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         database.execSQL(CREATE_TABLE_USER);
         database.execSQL(CREATE_TABLE_POST);
         database.execSQL(CREATE_TABLE_ACTIVITY);
-        database.execSQL(CREATE_TABLE_FRIENDSHIP);
+//        database.execSQL(CREATE_TABLE_FRIENDSHIP);
     }
 
     // Upgrade version database
@@ -121,10 +146,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void addNewUser() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues();
-        contentValue.put(COLUMN_USERNAME, "aaa");
-        contentValue.put(COLUMN_EMAIL, "aaa@gmail.com");
-        contentValue.put(COLUMN_PASSWORD, "aaa");
-        contentValue.put(COLUMN_IS_ACTIVE, "1");
+//        contentValue.put(COLUMN_USERNAME, "aaa");
+//        contentValue.put(COLUMN_EMAIL, "aaa@gmail.com");
+//        contentValue.put(COLUMN_PASSWORD, "aaa");
+//        contentValue.put(COLUMN_IS_ACTIVE, "1");
 
         db.insert(TABLE_USER, null, contentValue);
         db.close();

@@ -58,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "Confirm Password have to similar to Password", Toast.LENGTH_SHORT).show();
                 } else {
                     UserDao userDao = new UserDao(SignUpActivity.this);
-                    userDao.createUser(username, email, password, 1);
+//                    userDao.createUser(username, email, password, 1);
                     Toast.makeText(SignUpActivity.this, "Sign up account is successful ", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);

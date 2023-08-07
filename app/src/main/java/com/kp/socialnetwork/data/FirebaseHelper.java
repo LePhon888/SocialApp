@@ -2,6 +2,8 @@ package com.kp.socialnetwork.data;
 
 import android.net.Uri;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -11,9 +13,20 @@ public class FirebaseHelper {
     private static final FirebaseStorage firebaseStorage = FirebaseStorage.getInstance("gs://socialmediaapp-32653.appspot.com");
     private static final StorageReference storageReference;
     private static final StorageReference imageStorageReference;
+    private static FirebaseDatabase firebaseDatabase;
+
     static {
+
+        //Database
+        firebaseDatabase = FirebaseDatabase.getInstance("https://socialmediaapp-32653-default-rtdb.asia-southeast1.firebasedatabase.app/");
+
+
         storageReference = firebaseStorage.getReference();
         imageStorageReference = storageReference.child("images");
+    }
+
+    public static DatabaseReference getDatabaseReferenceByPath(String path) {
+        return firebaseDatabase.getReference(path);
     }
 
     public static StorageReference getImageAvatarStorageRef() {

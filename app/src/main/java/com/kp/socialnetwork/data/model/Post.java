@@ -1,5 +1,6 @@
 package com.kp.socialnetwork.data.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,13 +12,14 @@ public class Post {
     private User user;
     private List<Comment> comment;
 
-    public Post(String content, String image, String createdDate, User user, List<Comment> comment, List<Activity> activity) {
+    {
+        this.createdDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+    }
+
+    public Post(String content, String image, User user) {
         this.content = content;
         this.image = image;
-        this.setCreatedDate(createdDate);
         this.user = user;
-        this.comment = comment;
-        this.activity = activity;
     }
 
     public Post() {
@@ -92,7 +94,8 @@ public class Post {
         this.activity = activity;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public String setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
+        return createdDate;
     }
 }

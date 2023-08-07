@@ -1,27 +1,34 @@
 package com.kp.socialnetwork;
-import com.bumptech.glide.Glide;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.media.Image;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.kp.socialnetwork.activity.CreateOrUpdatePostActivity;
+import com.kp.socialnetwork.data.dao.PostDao;
+import com.kp.socialnetwork.data.dao.UserDao;
 import com.kp.socialnetwork.data.model.Post;
+import com.kp.socialnetwork.data.model.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostListAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private List<Post> postList;
-
+    private UserDao userDao;
+    //Retrive userId from PostListActivity
 //    private OnOptionClickListener optionClickListener;
 
     public PostListAdapter(Context context, int layout, List<Post> postList) {
@@ -54,10 +61,22 @@ public class PostListAdapter extends BaseAdapter {
 
         Post post = postList.get(position);
 
-        ImageView avatar = convertView.findViewById(R.id.avatar);
-        TextView name = convertView.findViewById(R.id.username);
+        CircleImageView avatar = convertView.findViewById(R.id.avatar);
+        TextView username = convertView.findViewById(R.id.username);
         TextView content = convertView.findViewById(R.id.content);
         ImageView imagePost = convertView.findViewById(R.id.imagePost);
+
+        //Get current user id
+//        int userId = Integer.parseInt(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        String userId = "1gPFtNBZLka3WJLVh04HBHprozj2";
+
+        //Load info user
+        userDao = new UserDao(context);
+        userDao.open();
+        User u = userDao.getUserById(userId);
+        Picasso.get().load(u.getImageAvatar()).into(avatar);
+        username.setText(u.getName());
+        userDao.close();
 
         content.setText(post.getContent());
         Picasso.get().load(post.getImage()).into(imagePost);
@@ -91,9 +110,17 @@ public class PostListAdapter extends BaseAdapter {
             }
 
             private void onDeleteClicked(Post post) {
+                PostDao postDao = new PostDao(context);
+                postDao.open();
+                postDao.deletePost(post.getId());
+                Toast.makeText(context, "This post is deleted !", Toast.LENGTH_SHORT).show();
+                postDao.close();
             }
 
             private void onUpdateClicked(Post post) {
+                Intent intent = new Intent(context, CreateOrUpdatePostActivity.class);
+                intent.putExtra("postId", post.getId());
+                context.startActivity(intent);
             }
         }).show();
     }

@@ -24,7 +24,10 @@ public class PostDao {
             MySQLiteHelper.COLUMN_IMAGE,
             MySQLiteHelper.COLUMN_CREATED_DATE};
 
-    public PostDao(Context context) { dbHelper = new MySQLiteHelper(context);}
+    public PostDao(Context context) {
+        dbHelper = new MySQLiteHelper(context);
+        database = dbHelper.getWritableDatabase();
+    }
 
     public void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
@@ -43,6 +46,20 @@ public class PostDao {
 
         long insertId = database.insert(MySQLiteHelper.TABLE_POST, null, values);
     }
+
+    public boolean createPost(Post post) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_CONTENT, post.getContent());
+        values.put(MySQLiteHelper.COLUMN_IMAGE, post.getImage());
+        values.put(MySQLiteHelper.COLUMN_CREATED_DATE, post.setCreatedDate(new Post().getCreatedDate()));
+        values.put(MySQLiteHelper.COLUMN_USER_ID, post.getUser().getId());
+
+
+        return database.insert(MySQLiteHelper.TABLE_POST, null, values) > 0;
+    }
+
+
+
     public void deletePost(long id){
         database.delete(MySQLiteHelper.TABLE_POST, MySQLiteHelper.COLUMN_ID_POST
                 + " = " + id, null);
@@ -62,25 +79,36 @@ public class PostDao {
         return null;
     }
 
-    public List<Post> getAllPosts() {
+    public Post searchPost(Post post) {
+        Post tempPost  = null;
+        try(Cursor cursor =database.rawQuery("Select * from " + MySQLiteHelper.TABLE_POST
+                        + " where " + MySQLiteHelper.COLUMN_ID_POST  + " = ? ",
+                new String[] {String.valueOf(post.getId())})){
+            if (cursor.moveToFirst() ) {
+                tempPost = cursorToPost(cursor);
+            }
+        }
+        return tempPost;
+    }
+
+    public boolean updatePost(Post post) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MySQLiteHelper.COLUMN_IMAGE, post.getImage());
+        contentValues.put(MySQLiteHelper.COLUMN_CONTENT, post.getContent());
+        contentValues.put(MySQLiteHelper.COLUMN_CREATED_DATE, post.setCreatedDate(new Post().getCreatedDate()));
+
+        return database.update(MySQLiteHelper.TABLE_POST, contentValues,
+                MySQLiteHelper.COLUMN_ID_POST + " = ? ", new String[]{String.valueOf(post.getId())}) > 0;
+    }
+
+    public List<Post> getAllPosts(String userId) {
         List<Post> posts = new ArrayList<>();
 
-//        Cursor c = database.rawQuery("SELECT * FROM Post", null);
-//
-//        while (c.moveToNext()) {
-//            Post post = new Post();
-//            post.setId(c.getInt(0));
-//            post.setContent(c.getString(1));
-//            post.setImage(c.getString(2));
-//            post.setCreatedDate(c.getString(3));
-//            post.setUser(null);
-//
-//            posts.add(post);
-//        }
-//        c.close();
+        String selection = MySQLiteHelper.COLUMN_USER_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(userId)};
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_POST, allColumns,
-                null, null, null,null,null);
+                selection, selectionArgs, null,null,null);
 
         cursor.moveToFirst();
 

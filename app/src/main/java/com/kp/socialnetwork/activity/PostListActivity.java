@@ -26,29 +26,17 @@ public class PostListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_list);
 
+        //Get current user id
+//        int userId = Integer.parseInt(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        String userId = "1gPFtNBZLka3WJLVh04HBHprozj2";
 
         postListView = findViewById(R.id.postListView);
 
         postDao = new PostDao(this);
         postDao.open();
-
         selectedImage = getIntent().getStringExtra("SELECTED_IMAGE");
 
-        List<Post> allPosts = postDao.getAllPosts();
-//        List<Post> orderedPosts = new ArrayList<>();
-//
-//        for (Post post : allPosts) {
-//            if (post.getImage().equals(selectedImage)) {
-//                orderedPosts.add(post);
-//                break;
-//            }
-//        }
-        // Add the rest of the posts except the selected image to the ordered list
-//        for (Post post : allPosts) {
-//            if (!post.getImage().equals(selectedImage)) {
-//                orderedPosts.add(post);
-//            }
-//        }
+        List<Post> allPosts = postDao.getAllPosts(userId);
 
         postDao.close();
 

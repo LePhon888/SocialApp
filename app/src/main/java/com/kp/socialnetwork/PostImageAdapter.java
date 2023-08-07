@@ -1,21 +1,15 @@
 package com.kp.socialnetwork;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,7 +20,7 @@ public class PostImageAdapter extends BaseAdapter {
     public PostImageAdapter(Context context, List<String> imagePaths) {
 //        super(context, R.layout.grid_item_layout, imagePaths);
         this.context = context;
-        this.imagePaths = imagePaths;
+        this.setImagePaths(imagePaths);
     }
 
     @Override
@@ -51,14 +45,15 @@ public class PostImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-        Picasso.get().load(imagePaths.get(position)).into(imageView);
+        Glide.with(context).load(getImagePaths().get(position)).placeholder(R.color.purple_200).into(imageView);
+//        Picasso.get().load(getImagePaths().get(position)).into(imageView);
 
         return imageView;
     }
 
     @Override
     public int getCount() {
-        return imagePaths.size();
+        return getImagePaths().size();
     }
 
     @Override
@@ -72,4 +67,12 @@ public class PostImageAdapter extends BaseAdapter {
     }
 
 
+    public List<String> getImagePaths() {
+        return imagePaths;
+    }
+
+    public void setImagePaths(List<String> imagePaths) {
+        this.imagePaths = imagePaths;
+        this.notifyDataSetChanged();
+    }
 }

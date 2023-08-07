@@ -3,13 +3,9 @@ package com.kp.socialnetwork.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,15 +25,14 @@ public class HomePageActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
+
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.d("BBBBBBBBBBB", String.valueOf(item.getItemId()));
-
                 if (item.getItemId() == R.id.createMenu) {
-                    Log.d("AAAAAAAAAAAAA", String.valueOf(item.getItemId()));
-                    showCreatePostDialog();
+                    Intent intent = new Intent(HomePageActivity.this, CreateOrUpdatePostActivity.class);
+                    startActivity(intent);
                     return true;
                 }
                 return false;
@@ -47,13 +42,4 @@ public class HomePageActivity extends AppCompatActivity {
 
     }
 
-    private void showCreatePostDialog() {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View dialogView = inflater.inflate(R.layout.dialog_create_post, null);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(dialogView);
-        Dialog dialog = builder.create();
-        dialog.show();
-    }
 }

@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ProfileActivity">
-
-
-
-
 
     <RelativeLayout
         android:layout_width="409dp"
@@ -16,14 +12,13 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
         <LinearLayout
+            android:id="@+id/layoutTop"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_margin="20dp"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="20dp"
-            android:id="@+id/layoutTop"
-            >
+            tools:layout_editor_absoluteY="20dp">
 
             <ImageView
                 android:id="@+id/logo"
@@ -32,12 +27,11 @@
                 android:src="@drawable/back" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewUsernameHeader"
                 android:layout_width="256dp"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@+id/logo"
                 android:layout_marginLeft="20dp"
-                android:text="leomessi"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -48,7 +42,6 @@
                 android:layout_height="30dp"
                 android:src="@drawable/bell" />
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -75,7 +68,7 @@
                     tools:layout_editor_absoluteY="55dp" />
 
                 <TextView
-                    android:id="@+id/txtFollower"
+                    android:id="@+id/textViewUsername"
                     android:layout_width="80dp"
                     android:layout_height="24dp"
                     android:layout_below="@+id/avatar"
@@ -91,31 +84,33 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/numOfFriend"
                     android:layout_width="112dp"
                     android:layout_height="24dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
+                    android:paddingLeft="4dp"
                     android:text="100M"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="normal"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="30dp"
-                    android:paddingLeft="4dp"
                     tools:layout_editor_absoluteX="184dp"
                     tools:layout_editor_absoluteY="93dp" />
+
                 <TextView
                     android:id="@+id/txtFriend"
                     android:layout_width="112dp"
                     android:layout_height="24dp"
+                    android:layout_below="@+id/numOfFriend"
+                    android:layout_marginLeft="30dp"
                     android:layout_weight="1"
                     android:text="Friends"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="normal"
-                    android:layout_below="@+id/numOfFriend"
-                    android:layout_marginLeft="30dp"
                     tools:layout_editor_absoluteX="184dp"
                     tools:layout_editor_absoluteY="93dp" />
             </RelativeLayout>
@@ -123,34 +118,35 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/numOfFollow"
                     android:layout_width="112dp"
                     android:layout_height="24dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
+                    android:paddingLeft="10dp"
                     android:text="100M"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="normal"
-                    android:layout_marginTop="20dp"
-                    android:paddingLeft="10dp"
                     tools:layout_editor_absoluteX="184dp"
                     tools:layout_editor_absoluteY="93dp" />
+
                 <TextView
                     android:id="@+id/txtFollow"
                     android:layout_width="112dp"
                     android:layout_height="24dp"
+                    android:layout_below="@+id/numOfFollow"
                     android:layout_weight="1"
                     android:text="Following"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="normal"
-                    android:layout_below="@+id/numOfFollow"
                     tools:layout_editor_absoluteX="184dp"
                     tools:layout_editor_absoluteY="93dp" />
 
             </RelativeLayout>
-
 
 
         </LinearLayout>
@@ -168,9 +164,9 @@
             android:id="@+id/friendBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/introduce"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_below="@+id/introduce"
             android:orientation="horizontal">
 
             <Button
@@ -179,19 +175,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
-                android:textColor="@color/black"
                 android:backgroundTint="@color/white"
-                android:text="Add Friend" />
+                android:text="Add Friend"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/followBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="8dp"
-                android:textColor="@color/black"
+                android:layout_weight="1"
                 android:backgroundTint="@color/white"
-                android:text="Follow" />
+                android:text="Follow"
+                android:textColor="@color/black" />
 
 
         </LinearLayout>
@@ -217,28 +213,30 @@
                 android:layout_width="123dp"
                 android:layout_height="30dp"
                 android:src="@drawable/blog" />
+
             <ImageView
                 android:id="@+id/videoBtn"
                 android:layout_width="123dp"
                 android:layout_height="30dp"
                 android:src="@drawable/video" />
         </LinearLayout>
+
         <View
             android:id="@+id/horizontalLine"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/navbar"
             android:layout_marginTop="16dp"
-            android:background="@android:color/black"/>
+            android:background="@android:color/black" />
 
         <GridView
             android:id="@+id/postGridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomNavigationView"
             android:layout_below="@+id/horizontalLine"
-            android:numColumns="3"
-            android:layout_above="@+id/bottomNavigationView"/>
+            android:numColumns="3" />
 
-        <include layout="@layout/layout_footer"/>
+        <include layout="@layout/layout_footer" />
     </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
